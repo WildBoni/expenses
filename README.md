@@ -11,11 +11,11 @@ EXPENSES is an open-source expense tracker for your family.
 
 These are the main features (please note that EXPENSES is still under development):
 
-- [] Responsive layout: access your expenses database from mobile
-- [] Edit/Update your expenses
+- [ ] Responsive layout: access your expenses database from mobile
+- [ ] Edit/Update your expenses
 - [ ] Login / Subscribe with different accounts
-- []  Auto-create MySql database structure through php install page
-- [] AJAX implementation
+- [ ]  Auto-create MySql database structure through php install page
+- [ ] AJAX implementation
 
 ## Installation
 
