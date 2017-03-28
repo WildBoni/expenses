@@ -28,7 +28,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-  <title>Welcome</title>
+  <title>EXPENSES TRACKER</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport" >
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
   <script src="js/jquery-1.10.2.js"></script>
@@ -104,6 +104,36 @@
   	    }
   		});
   	});
+
+    $(document).on('click','#btn_clearIN',function(){
+      if(confirm("Are you sure you want to delete everything?")) {
+    		$.ajax({
+    	    url : "ajaxdelete.php",
+    	    type: "POST",
+    	    data : 'clear=in',
+    	    success: function(data)
+    	    {
+            window.location.reload();
+    	    }
+    		});
+      }
+      return false;
+  	});
+
+    $(document).on('click','#btn_clearOUT',function(){
+      if(confirm("Are you sure you want to delete everything?")) {
+    		$.ajax({
+    	    url : "ajaxdelete.php",
+    	    type: "POST",
+    	    data : 'clear=out',
+    	    success: function(data)
+    	    {
+            window.location.reload();
+    	    }
+    		});
+      }
+      return false;
+  	});
   </script>
 
 </head>
@@ -113,7 +143,7 @@
     a{color: #ababab;}
   </style>
   <div class="container-fluid">
-    <div class="row" style="background-color:#356b67; color:#FFF;">
+    <div class="row" style="background-color:#427242; color:#FFF;">
       <div class="col-sm-12">
           <h1>IN</h1>
           <?php if ($result->num_rows > 0) {
@@ -121,7 +151,7 @@
           <ul style="list-style:none; padding:0;">
           <?php while($row = $result->fetch_array()) {
           ?>
-            <li style="background-color:#1e524e; margin: 8px 0; padding:8px;">
+            <li style="background-color:#2c4f2c; margin: 8px 0; padding:8px;">
               <span class="incomeAmount" contenteditable="true" onBlur="saveToDatabase('income',this,'amount','<?php echo $row["id"] ?>')" onClick="showEdit(this);"><?php echo $row['amount'] ?></span>
                € |
                <span contenteditable="true" onBlur="saveToDatabase('income',this,'description','<?php echo $row["id"] ?>')" onClick="showEdit(this);"><?php echo $row['description'] ?></span>
@@ -135,11 +165,11 @@
         <?php } ?>
       </div>
       <div class="col-sm-12">
-      	      <form class="form" style="padding-bottom:20px;" action="" method="post" enctype="multipart/form-data">
+      	      <form class="form" action="" method="post" enctype="multipart/form-data">
                 <div class="form-group">
       						<div class="row">
                     <div class="text-center">
-                      <button type="button" style="margin: 10px 20px;" class="btn btn-info" data-toggle="collapse" data-target="#demo">NEW</button>
+                      <button type="button" style="margin: 10px 20px;" class="btn btn-success" data-toggle="collapse" data-target="#demo">NEW</button>
                     </div>
                     <div id="demo" class="collapse" style="padding: 0 10px;">
                       <div class="row">
@@ -163,9 +193,12 @@
       					</div>
               </form>
       </div>
+      <div class="col-sm-12 text-center">
+        <button type="button" style="margin: 10px 20px;" id="btn_clearIN" class="btn btn-warning">CLEAR ALL</button>
+      </div>
     </div>
 
-    <div class="row" style="background-color:#651c1c; color:#FFF;">
+    <div class="row" style="background-color:#842626; color:#FFF;">
       <div class="col-sm-12">
           <h1>OUT</h1>
           <?php if ($result2->num_rows > 0) {
@@ -173,7 +206,7 @@
           <ul style="list-style:none; padding:0;">
           <?php while($row2 = $result2->fetch_array()) {
           ?>
-            <li style="background-color:#893939; margin: 8px 0; padding:8px;">
+            <li style="background-color:#651c1c; margin: 8px 0; padding:8px;">
               <span contenteditable="true" onBlur="saveToDatabase('outcome',this,'amount','<?php echo $row2["id"] ?>')" onClick="showEdit(this);"><?php echo $row2['amount'] ?></span>
                € |
                <span contenteditable="true" onBlur="saveToDatabase('outcome',this,'description','<?php echo $row2["id"] ?>')" onClick="showEdit(this);"><?php echo $row2['description'] ?></span>
@@ -187,11 +220,11 @@
         <?php } ?>
       </div>
       <div class="col-sm-12">
-      	      <form class="form" style="padding-bottom:20px;" action="" method="post" enctype="multipart/form-data">
+      	      <form class="form" action="" method="post" enctype="multipart/form-data">
                 <div class="form-group">
       						<div class="row">
                     <div class="text-center">
-                      <button type="button" style="margin: 10px 20px;" class="btn btn-info" data-toggle="collapse" data-target="#demo1">NEW</button>
+                      <button type="button" style="margin: 10px 20px;" class="btn btn-danger" data-toggle="collapse" data-target="#demo1">NEW</button>
                     </div>
                     <div id="demo1" class="collapse" style="padding: 0 10px;">
                       <div class="row">
@@ -215,12 +248,15 @@
       					</div>
               </form>
       </div>
+      <div class="col-sm-12 text-center">
+        <button type="button" style="margin: 10px 20px;" id="btn_clearOUT" class="btn btn-warning">CLEAR ALL</button>
+      </div>
     </div>
 
-    <div class="row"  style="background-color: #4c481c; padding:20px; color:#FFF;">
+    <div class="row"  style="background-color: #426472; padding:20px; color:#FFF;">
       <div class="col-sm-12 text-center">
           <h1>SALDO:</h1>
-          <div style="background-color:#7b752a; padding:4px;">
+          <div style="background-color:#224857; padding:4px;">
             <h2><?php echo $totIncome - $totOutcome ?> €</h2>
           </div>
       </div>
