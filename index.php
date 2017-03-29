@@ -152,10 +152,11 @@
           <?php while($row = $result->fetch_array()) {
           ?>
             <li style="background-color:#2c4f2c; margin: 8px 0; padding:8px;">
-              <span class="incomeAmount" contenteditable="true" onBlur="saveToDatabase('income',this,'amount','<?php echo $row["id"] ?>')" onClick="showEdit(this);"><?php echo $row['amount'] ?></span>
-               € |
+              <strong><span class="incomeAmount" contenteditable="true" onBlur="saveToDatabase('income',this,'amount','<?php echo $row["id"] ?>')" onClick="showEdit(this);"><?php echo $row['amount'] ?></span>
+               €</strong> |
                <span contenteditable="true" onBlur="saveToDatabase('income',this,'description','<?php echo $row["id"] ?>')" onClick="showEdit(this);"><?php echo $row['description'] ?></span>
-                | <a data-table="income" data-id="<?php echo $row['id'] ?>" class="delete" href="#">Delete</a>
+               | <?php echo date("d-m-Y", strtotime($row["date"])) ?>
+               | <a data-table="income" data-id="<?php echo $row['id'] ?>" class="delete" href="#">Delete</a>
             </li>
           <?php } ?>
           </ul>
@@ -207,9 +208,10 @@
           <?php while($row2 = $result2->fetch_array()) {
           ?>
             <li style="background-color:#651c1c; margin: 8px 0; padding:8px;">
-              <span contenteditable="true" onBlur="saveToDatabase('outcome',this,'amount','<?php echo $row2["id"] ?>')" onClick="showEdit(this);"><?php echo $row2['amount'] ?></span>
-               € |
+              <strong><span contenteditable="true" onBlur="saveToDatabase('outcome',this,'amount','<?php echo $row2["id"] ?>')" onClick="showEdit(this);"><?php echo $row2['amount'] ?></span>
+               €</strong> |
                <span contenteditable="true" onBlur="saveToDatabase('outcome',this,'description','<?php echo $row2["id"] ?>')" onClick="showEdit(this);"><?php echo $row2['description'] ?></span>
+                | <?php echo date("d-m-Y", strtotime($row2["date"])) ?>
                 | <a data-table="outcome" data-id="<?php echo $row2['id'] ?>" class="delete" href="#">Delete</a>
             </li>
           <?php } ?>
