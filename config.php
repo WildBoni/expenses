@@ -3,5 +3,4 @@
   $dbusername = "root";
   $dbpassword = "";
   $dbname = "expenses";
-
 ?>
